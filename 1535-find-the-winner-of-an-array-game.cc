@@ -1,5 +1,5 @@
 // author: Jackie
-// time: 22-7-26
+// time: 22-7-29
 // leetcode link: https://leetcode.cn/problems/find-the-winner-of-an-array-game/submissions/
 
 class Solution {
