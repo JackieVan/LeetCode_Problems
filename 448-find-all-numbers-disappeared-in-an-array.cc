@@ -1,9 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
-
-        #include <memory.h>
-using namespace std;
+// author: Jackie
+// time: 22-7-30
+// leetcode link: https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/
 
 class Solution {
 public:
@@ -11,8 +8,7 @@ public:
         int size = nums.size();
         std::vector<int> res;
         res.reserve(size / 2);
-        int *label = new int[size];
-        memset(label, 0, size);
+        std::vector<int> label(size, 0);
         for (int val : nums)
         {
             label[val - 1] = 1;
@@ -24,17 +20,6 @@ public:
                 res.push_back(i+1);
             }
         }
-        delete[] label;
         return res;
     }
 };
-
-
-int main()
-{
-  std::vector<int> nums = { 4,3,2,7,8,2,3,1 };
-  std::vector<int> temp(1000, 9);
-  Solution sol;
-  std::cout << sol.findDisappearedNumbers(nums)[0] << "\n";
-  return 0;
-}
