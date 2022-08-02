@@ -1,11 +1,31 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <map>
-#include <memory.h>
+// author: Jackie
+// time: 22-8-2
+// leetcode link: https://leetcode.cn/problems/ugly-number-ii/solution/
 
-using namespace std;
-
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        std::set<long long> set = { 1 };
+        int count = 0;
+        long long ans = 0;
+        while (true)
+        {
+            ans = *set.begin();
+            set.erase(set.begin());
+            if (++count == n)
+            {
+                break;
+            }
+            else if (set.size() < n )
+            {
+                set.insert(2 * ans);
+                set.insert(3 * ans);
+                set.insert(5 * ans);                
+            }
+        }
+        return ans;
+    }
+};
 
 class Solution {
 public:
@@ -36,11 +56,3 @@ public:
         return num[n];
     }
 };
-
-
-int main()
-{
-  Solution sol;
-  std::cout << sol.nthUglyNumber(10) << "\n";
-  return 0;
-}
