@@ -1,40 +1,61 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
+#include <memory.h>
 
-        #include <memory.h>
 using namespace std;
+
+
+//   Definition for a binary tree node.
+  struct TreeNode {
+      int val;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  };
 
 class Solution {
 public:
-    vector<int> findDisappearedNumbers(vector<int>& nums) {
-        int size = nums.size();
-        std::vector<int> res;
-        res.reserve(size / 2);
-        int *label = new int[size];
-        memset(label, 0, size);
-        for (int val : nums)
+    bool isValidBST(TreeNode* root) {
+        static bool flag = true;
+        static int init_val;
+        if (flag)
         {
-            label[val - 1] = 1;
+            init_val = root->val;
+            flag = false;
         }
-        for (int i = 0; i != size; ++i)
+        if (root->left && (root->left->val >= root->val || root->left->val >= init_val))
         {
-            if (label[i] == 0)
-            {
-                res.push_back(i+1);
-            }
+            return false;
         }
-        delete[] label;
-        return res;
+        if (root->right && (root->right->val <= root->val || root->right->val <= init_val))
+        {
+            return false;
+        }
+        if (root->left && isValidBST(root->left) == false)
+        {
+            return false;
+        }
+        if (root->right && isValidBST(root->right) == false)
+        {
+            return false;
+        }
+        return true;
     }
 };
 
 
 int main()
 {
-  std::vector<int> nums = { 4,3,2,7,8,2,3,1 };
-  std::vector<int> temp(1000, 9);
+  TreeNode *root = new TreeNode(0);
+  root->left = nullptr;
+  root->right = new TreeNode(1);
+  root->right->left = nullptr;
+  root->right->right = nullptr;
   Solution sol;
-  std::cout << sol.findDisappearedNumbers(nums)[0] << "\n";
+  std::cout << sol.isValidBST(root) << "\n";
   return 0;
 }
