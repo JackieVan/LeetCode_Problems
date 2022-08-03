@@ -40,7 +40,12 @@ public:
 
 int main()
 {
-  Solution sol;
-  std::cout << sol.nthUglyNumber(10) << "\n";
-  return 0;
+    Solution sol;
+    char ch = 'a';
+    // std::cout << sol.nthUglyNumber(10) << "\n";
+    // std::cout << (int)ch << "\n";
+    std::string str = "abc";
+    str.erase(str.find("b"));
+    std::cout << str << "\n";
+    return 0;
 }
