@@ -6,46 +6,37 @@
 
 using namespace std;
 
-
 class Solution {
 public:
-    int nthUglyNumber(int n) {
-        std::vector<int> num(n+1, 0);
-        num[1] = 1;
-        int p2, p3, p5;
-        p2 = p3 = p5 = 1;
-        for (int i = 2; i != n+1; ++i)
+    string maxValue(string n, int x) {
+        string ans = n;
+        int s = n[0] == '-' ? 1 : 0;
+        for (int i = s; i != n.size(); ++i)
         {
-            int num2 = num[p2] * 2;
-            int num3 = num[p3] * 3;
-            int num5 = num[p5] * 5;
-            num[i] = std::min(std::min(num2, num3), num5);
-            if (num[i] == num2)
+            if (n[0] != '-' && x > (int)n[i])
             {
-                ++p2;
+                ans.insert(i, to_string(x));
+                break;
             }
-            if (num[i] == num3)
+            else if (n[0] == '-' && x < (int)n[i])
             {
-                ++p3;
-            }
-            if (num[i] == num5)
-            {
-                ++p5;
+                ans.insert(i, to_string(x));
+                break;
             }
         }
-        return num[n];
+        if (ans.size() == n.size())
+        {
+            ans += to_string(x);
+        }
+        return ans;
     }
 };
-
 
 int main()
 {
     Solution sol;
-    char ch = 'a';
-    // std::cout << sol.nthUglyNumber(10) << "\n";
-    // std::cout << (int)ch << "\n";
-    std::string str = "abc";
-    str.erase(str.find("b"));
-    std::cout << str << "\n";
+    string n = "-13";
+    auto res = sol.maxValue(n, 2);
+    std::cout << res << "\n";
     return 0;
 }
