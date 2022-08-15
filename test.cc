@@ -6,45 +6,27 @@
 #include <queue>
 
 using namespace std;
-class Solution {
-public:
-    std::vector<int> sign;
-    std::vector<int> size;
-    int max = 100000;
-    void helper(int curr_sign, int curr_size, int idx, vector<string>& arr)
-    {
-        if (idx == arr.size() && curr_size > max)
-        {
-            max = curr_size;
-        }
-        if (curr_sign ^ sign[idx] == curr_sign | sign[idx])
-        {
-            helper(curr_sign ^ sign[idx], curr_size + size[idx], idx + 1, arr);
-        }
-        helper(curr_sign, curr_size, idx + 1, arr);
-    }
 
-    int maxLength(vector<string>& arr) {
-        sign.reserve(arr.size());
-        size.reserve(arr.size());
-        for (const string& str : arr)
-        {
-            int s = 0;
-            for (char ch : str)
-            {
-                s += (1 << ch - 'a');
-            }
-            sign.push_back(s);
-            size.push_back(str.size());
-        }
-        helper(0, 0, 0, arr);
-        return max;
-    }
-};
+
 int main()
 {
-    Solution sol;
-    std::vector<string> vec = {"un","iq","ue"};
-    sol.maxLength(vec);
+    int n = 2;
+   int one_num = 0;
+       if (n < 0)
+       {
+           return false;
+       }
+       while (n != 0)
+       {
+           one_num += (n & 1);
+           n >>= 1;
+       std::cout << one_num << "\n";
+       }
+       if (one_num != 1)
+       {
+           return false;
+       }
+        bool res = (n | 0x55555555) == 0x55555555;
+    std::cout << res << "\n";
     return 0;
 }
