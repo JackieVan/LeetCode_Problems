@@ -1,11 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <map>
-#include <memory.h>
-#include <queue>
-
-using namespace std;
+// author: Jackie
+// time: 22-8-17
+// leetcode link: https://leetcode.cn/problems/longest-palindromic-substring/
 
 class Solution {
 public:
@@ -17,7 +12,8 @@ public:
             {
                 seed.emplace_back(i-1, i+1);
             }
-            if (s[i] == s[i+1]) {
+            if (s[i] == s[i+1])
+            {
                 seed.emplace_back(i, i+1);
             }
         }
@@ -38,16 +34,11 @@ public:
                 h = q;
                 e = p;
             }
+            if (h-e+1 == s.size())
+            {
+                break;
+            }
         }
         return string(s, e, h-e+1);
     }
 };
-
-int main()
-{
-    string s = "aaaa";
-    Solution sol;
-    auto vec = sol.longestPalindrome(s);
-    std::cout << vec << "\n";
-    return 0;
-}
