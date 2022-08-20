@@ -1,12 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <map>
-#include <memory.h>
-#include <queue>
-#include <algorithm>
-
-using namespace std;
+// author: Jackie
+// time: 22-8-20
+// leetcode link: https://leetcode.cn/problems/minimum-absolute-difference/
 
 class Solution {
 public:
@@ -24,22 +18,13 @@ public:
             {
                 min_diff = arr[i+1] - arr[i];
                 ans.clear();
-                vector<int> vec = {arr[i], arr[i+1]};
-                ans.emplace_back(vec);
+                ans.push_back({arr[i], arr[i+1]});
             }
             else
             {
-                ans.emplace_back(arr[i], arr[i+1]);
+                ans.push_back({arr[i], arr[i+1]});
             }
         }
         return ans;
     }
 };
-
-int main()
-{
-    Solution sol;
-    std::vector<int> vec = {2,1,4,3};
-    sol.minimumAbsDifference(vec);
-    return 0;
-}
