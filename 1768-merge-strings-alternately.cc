@@ -1,13 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <map>
-#include <memory.h>
-#include <set>
-#include <queue>
-#include <algorithm>
-
-using namespace std;
+// author: Jackie
+// time: 22-8-21
+// leetcode link: https://leetcode.cn/problems/merge-strings-alternately/
 
 class Solution {
 public:
@@ -15,7 +8,7 @@ public:
     {
         int idx1 = 0;
         int idx2 = 0;
-        string ans = 0;
+        string ans;
         while (idx1 != word1.size() || idx2 != word2.size())
         {
             if (idx1 != word1.size())
@@ -30,13 +23,3 @@ public:
         return ans;
     }
 };
-
-
-int main()
-{
-    Solution sol;
-    std::string w1 = "abc";
-    std::string w2 = "def";
-    std::cout << sol.mergeAlternately(w1, w2) << "\n";
-    return 0;
-}
