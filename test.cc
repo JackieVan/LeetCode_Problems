@@ -31,12 +31,12 @@ public:
     }
 };
 
+namespace std
+{
+    void func() { std::cout << "hello !\n"; }
+}
 
 int main()
 {
-    Solution sol;
-    std::string w1 = "abc";
-    std::string w2 = "def";
-    std::cout << sol.mergeAlternately(w1, w2) << "\n";
     return 0;
 }
