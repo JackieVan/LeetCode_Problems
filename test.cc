@@ -9,34 +9,51 @@
 
 using namespace std;
 
+// Definition for singly-linked list.
+struct ListNode 
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+ 
 class Solution {
-public:
-    string mergeAlternately(string word1, string word2) 
+    ListNode *tail = nullptr;
+    ListNode *rec(ListNode *node)
     {
-        int idx1 = 0;
-        int idx2 = 0;
-        string ans = 0;
-        while (idx1 != word1.size() || idx2 != word2.size())
-        {
-            if (idx1 != word1.size())
-            {
-                ans.append(1, word1[idx1++]);
-            }
-            if (idx2 != word2.size())
-            {
-                ans.append(1, word2[idx2++]);
-            }
+        if (node->next) {
+            rec(node->next)->next = node;
+            return node;    
+        } 
+        else {
+            tail = node;
+            return tail;
         }
-        return ans;
+    }
+public:
+    ListNode* reverseList(ListNode* head) 
+    {
+        rec(head);
+        return tail;
     }
 };
 
-namespace std
-{
-    void func() { std::cout << "hello !\n"; }
-}
 
 int main()
 {
+    ListNode *node1 = new ListNode(1);
+    ListNode *node2 = new ListNode(2);
+    ListNode *node3 = new ListNode(3);
+    ListNode *node4 = new ListNode(4);
+    ListNode *node5 = new ListNode(5);
+    node1->next = node2;
+    node2->next = node3;
+    node3->next = node4;
+    node4->next = node5;
+    Solution sol;
+    std::cout << node5 << "\n";
+    std::cout << sol.reverseList(node1) << "\n";
     return 0;
 }
