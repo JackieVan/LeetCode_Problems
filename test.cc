@@ -41,6 +41,13 @@ public:
     }
 };
 
+class T
+{
+int func() { return 1; }
+
+int func() const { return 1; }
+
+};
 
 
 int main()
