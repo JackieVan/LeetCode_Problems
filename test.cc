@@ -10,39 +10,71 @@
 using namespace std;
 
 // Definition for singly-linked list.
-struct ListNode 
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+
+//  * Definition for a binary tree node.
+// struct TreeNode {
+//     int val;
+//     TreeNode *left;
+//     TreeNode *right;
+//     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+// };
+ 
+
+//  * Definition for singly-linked list.
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
  
 class Solution {
-    ListNode *tail = nullptr;
-    ListNode *rec(ListNode *node)
-    {
-        if (node->next) {
-            rec(node->next)->next = node;
-            return node;    
-        } 
-        else {
-            tail = node;
-            return tail;
-        }
-    }
 public:
-    ListNode* reverseList(ListNode* head) 
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
     {
-        rec(head);
-        return tail;
+        ListNode *ptrA = headA;
+        ListNode *ptrB = headB;
+        bool labelA = false;
+        bool labelB = false;
+        while (true)
+        {
+            ptrA = ptrA->next;
+            ptrB = ptrB->next;
+            if (ptrA == NULL)
+            {
+                if (labelA == false) {
+                    ptrA = headB;
+                    labelA = true;
+                } else {
+                    return NULL;
+                }
+            }
+            if (ptrB == NULL)
+            {
+                if (labelB == false) {
+                    ptrB = headA;
+                    labelB = true;
+                } else {
+                    return NULL;
+                }
+            }
+            if (ptrA == ptrB)
+            {
+                return ptrA;
+            }
+        }
     }
 };
 
 
 int main()
 {
+    // TreeNode *node1 = new TreeNode(1);
+    // TreeNode *node2 = new TreeNode(2);
+    // TreeNode *node3 = new TreeNode(3);
+    // TreeNode *node4 = new TreeNode(4);
+    // TreeNode *node5 = new TreeNode(5);
     ListNode *node1 = new ListNode(1);
     ListNode *node2 = new ListNode(2);
     ListNode *node3 = new ListNode(3);
@@ -53,7 +85,6 @@ int main()
     node3->next = node4;
     node4->next = node5;
     Solution sol;
-    std::cout << node5 << "\n";
-    std::cout << sol.reverseList(node1) << "\n";
+    std::cout << sol.getIntersectionNode(node1, node1)->val << "\n";
     return 0;
 }
