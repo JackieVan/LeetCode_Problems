@@ -6,37 +6,29 @@
 #include <set>
 #include <queue>
 #include <algorithm>
+#include <stack>
 
 using namespace std;
 
-class Solution {
-public:
-    string mergeAlternately(string word1, string word2) 
+bool isValid(string s) 
     {
-        int idx1 = 0;
-        int idx2 = 0;
-        string ans = 0;
-        while (idx1 != word1.size() || idx2 != word2.size())
+        std::map<char, char> map = { {')', '('}, {'}', '{'}, {']', '['} };
+        std::stack<char> stack;
+        for (char ch : s)
         {
-            if (idx1 != word1.size())
+            if (stack.size() != 0 && stack.top() == map[ch])
             {
-                ans.append(1, word1[idx1++]);
+                stack.pop();
             }
-            if (idx2 != word2.size())
-            {
-                ans.append(1, word2[idx2++]);
-            }
+            stack.push(ch);
         }
-        return ans;
+        return stack.size() == 0;
     }
-};
 
-namespace std
-{
-    void func() { std::cout << "hello !\n"; }
-}
 
 int main()
 {
+    std::string s = "()";
+    std::cout << isValid(s) << "\n";
     return 0;
 }
