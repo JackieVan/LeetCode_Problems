@@ -6,6 +6,7 @@
 #include <set>
 #include <queue>
 #include <algorithm>
+#include <stack>
 
 using namespace std;
 
@@ -65,6 +66,14 @@ public:
             }
         }
     }
+};
+
+class T
+{
+int func() { return 1; }
+
+int func() const { return 1; }
+
 };
 
 
